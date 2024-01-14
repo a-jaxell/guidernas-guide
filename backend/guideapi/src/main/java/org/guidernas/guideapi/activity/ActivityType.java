@@ -1,2 +1,7 @@
-package org.guidernas.guideapi.activity;public interface ActivityType {
+package org.guidernas.guideapi.activity;
+
+public enum ActivityType {
+    SKIING,
+    HIKING,
+    KAYAKING
 }
