@@ -1,7 +1,12 @@
 package org.guidernas.guideapi.user;
 
+import jakarta.transaction.Transactional;
 import org.guidernas.guideapi.activity.Activity;
+import org.guidernas.guideapi.activity.ActivityCreateDto;
+import org.guidernas.guideapi.activity.ActivityUpdateDto;
+import org.guidernas.guideapi.exception.ActivityNotFoundException;
 import org.guidernas.guideapi.exception.CustomerNotFoundException;
+import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.qualification.Qualification;
 import org.guidernas.guideapi.qualification.QualificationRepository;
 import org.springframework.stereotype.Service;
@@ -37,6 +42,37 @@ public class CustomerService {
                 .map(Customer::getAttendedActivities)
                 .orElse(Collections.emptySet());
     }
-    // TODO: Add CRUD methods
+    @Transactional
+    // Make custom validation for this method
+    public Customer createCustomer(CustomerCreateDto createDto){
 
+        Customer newCustomer = new Customer();
+
+        newCustomer.setFirstName(createDto.firstName());
+        newCustomer.setLastName(createDto.lastName());
+
+        Customer savedCustomer = customerRepository.save(newCustomer);
+        return savedCustomer;
+    }
+    @Transactional
+    public Customer updateCustomer(CustomerUpdateDto updateDto) throws ResourceNotFoundException {
+        Customer customer = customerRepository.findById(updateDto.id()).orElseThrow(CustomerNotFoundException::new);
+
+        if (updateDto.firstName() != null) customer.setFirstName(updateDto.firstName());
+        if (updateDto.lastName() != null) customer.setLastName(updateDto.lastName());
+
+        Customer updatedCustomer = customerRepository.save(customer);
+
+        return updatedCustomer;
+    }
+    @Transactional
+    public boolean deleteCustomer(Long customerId){
+        var customer = customerRepository.findById(customerId);
+
+        if(customer.isPresent()){
+            customerRepository.deleteById(customerId);
+            return true;
+        }
+        return false;
+    }
 }
