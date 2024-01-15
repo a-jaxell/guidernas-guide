@@ -51,8 +51,8 @@ public class CustomerService {
         return savedCustomer;
     }
     @Transactional
-    public Customer updateCustomer(CustomerUpdateDto updateDto) throws ResourceNotFoundException {
-        Customer customer = customerRepository.findById(updateDto.id()).orElseThrow(CustomerNotFoundException::new);
+    public Customer updateCustomer(Long id, CustomerUpdateDto updateDto) throws ResourceNotFoundException {
+        Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
 
         if (updateDto.firstName() != null) customer.setFirstName(updateDto.firstName());
         if (updateDto.lastName() != null) customer.setLastName(updateDto.lastName());
