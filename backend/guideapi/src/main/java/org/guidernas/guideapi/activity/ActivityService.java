@@ -1,5 +1,6 @@
 package org.guidernas.guideapi.activity;
 
+import org.guidernas.guideapi.exception.ActivityNotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class ActivityService {
     }
 
     public Activity getActivityById(Long id){
-        return repository.findById(id).orElseThrow(IllegalAccessError::new);
+        return repository.findById(id).orElseThrow(ActivityNotFoundException::new);
     }
     // create new activity
     // update activity
