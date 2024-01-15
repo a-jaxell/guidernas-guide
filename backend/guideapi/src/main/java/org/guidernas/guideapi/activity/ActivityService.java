@@ -2,6 +2,7 @@ package org.guidernas.guideapi.activity;
 
 import jakarta.transaction.Transactional;
 import org.guidernas.guideapi.exception.ActivityNotFoundException;
+import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class ActivityService {
         return savedActivity;
     }
     @Transactional
-    public Activity updateActivity(ActivityUpdateDto updateDto) {
+    public Activity updateActivity(ActivityUpdateDto updateDto) throws ResourceNotFoundException {
         Activity activity = repository.findById(updateDto.id()).orElseThrow(ActivityNotFoundException::new);
 
         if (updateDto.status() != null) activity.setStatus(updateDto.status());
