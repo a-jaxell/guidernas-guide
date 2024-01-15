@@ -1,12 +1,9 @@
 package org.guidernas.guideapi.user.organization;
 
 import jakarta.transaction.Transactional;
-import org.guidernas.guideapi.exception.GuideNotFoundException;
 import org.guidernas.guideapi.exception.OrganizationNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.user.guide.Guide;
-import org.guidernas.guideapi.user.guide.GuideCreateDto;
-import org.guidernas.guideapi.user.guide.GuideUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

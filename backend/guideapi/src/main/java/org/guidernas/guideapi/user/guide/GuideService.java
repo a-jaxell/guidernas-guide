@@ -49,8 +49,8 @@ public class GuideService {
         return savedGuide;
     }
     @Transactional
-    public Guide updateGuide(GuideUpdateDto updateDto) throws ResourceNotFoundException {
-        Guide guide = guideRepository.findById(updateDto.id()).orElseThrow(GuideNotFoundException::new);
+    public Guide updateGuide(Long id, GuideUpdateDto updateDto) throws ResourceNotFoundException {
+        Guide guide = guideRepository.findById(id).orElseThrow(GuideNotFoundException::new);
 
         if (updateDto.firstName() != null) guide.setFirstName(updateDto.firstName());
         if (updateDto.lastName() != null) guide.setLastName(updateDto.lastName());
