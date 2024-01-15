@@ -42,8 +42,8 @@ public class OrganizationService {
         return savedOrganization;
     }
     @Transactional
-    public Organization updateOrganization(OrganizationUpdateDto updateDto) throws ResourceNotFoundException {
-        Organization org = organizationRepository.findById(updateDto.id()).orElseThrow(OrganizationNotFoundException::new);
+    public Organization updateOrganization(Long id, OrganizationUpdateDto updateDto) throws ResourceNotFoundException {
+        Organization org = organizationRepository.findById(id).orElseThrow(OrganizationNotFoundException::new);
 
         if (updateDto.description() != null) org.setDescription(updateDto.description());
         if (updateDto.organizationName() != null) org.setOrganizationName(updateDto.organizationName());
