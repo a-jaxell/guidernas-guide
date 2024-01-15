@@ -1,8 +1,8 @@
 package org.guidernas.guideapi.exception;
 
-public class CustomerNotFoundException extends ResourceNotFoundException{
+public class CustomerNotFoundException extends ResourceNotFoundException {
 
-    public CustomerNotFoundException(){
+    public CustomerNotFoundException() {
         super("Customer not found");
     }
 }

@@ -2,7 +2,6 @@ package org.guidernas.guideapi.activity;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Size;
-import lombok.Value;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

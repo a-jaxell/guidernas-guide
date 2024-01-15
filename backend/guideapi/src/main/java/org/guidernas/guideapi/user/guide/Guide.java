@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.guidernas.guideapi.activity.Activity;
 import org.guidernas.guideapi.qualification.Qualification;
-import org.guidernas.guideapi.user.organization.Organization;
 import org.guidernas.guideapi.user.Professional;
+import org.guidernas.guideapi.user.organization.Organization;
 
 import java.util.HashSet;
 import java.util.Set;

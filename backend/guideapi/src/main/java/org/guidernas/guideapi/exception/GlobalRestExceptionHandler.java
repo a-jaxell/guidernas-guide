@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalRestExceptionHandler {
 
     @ExceptionHandler(ActivityNotFoundException.class)
-    public ResponseEntity<String> handleActivityNotFound(ActivityNotFoundException ex){
+    public ResponseEntity<String> handleActivityNotFound(ActivityNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

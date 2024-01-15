@@ -21,10 +21,10 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="status", nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
 
     @Column(name = "description")

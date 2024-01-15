@@ -18,20 +18,24 @@ public class OrganizationService {
     public OrganizationService(OrganizationRepository organizationRepository) {
         this.organizationRepository = organizationRepository;
     }
-    public List<Organization> getAllOrganizations(){
+
+    public List<Organization> getAllOrganizations() {
         return organizationRepository.findAll();
     }
-    public Organization getOrganizationById(Long id){
+
+    public Organization getOrganizationById(Long id) {
         return organizationRepository.findById(id).orElseThrow(OrganizationNotFoundException::new);
     }
-    public Set<Guide> getGuidesByOrganization(Long organizationId){
+
+    public Set<Guide> getGuidesByOrganization(Long organizationId) {
         return organizationRepository.findById(organizationId)
                 .map(Organization::getGuides)
                 .orElse(Collections.emptySet());
     }
+
     @Transactional
     // Make custom validation for this method
-    public Organization createOrganization(OrganizationCreateDto createDto){
+    public Organization createOrganization(OrganizationCreateDto createDto) {
 
         Organization newOrganization = new Organization();
 
@@ -41,6 +45,7 @@ public class OrganizationService {
         Organization savedOrganization = organizationRepository.save(newOrganization);
         return savedOrganization;
     }
+
     @Transactional
     public Organization updateOrganization(Long id, OrganizationUpdateDto updateDto) throws ResourceNotFoundException {
         Organization org = organizationRepository.findById(id).orElseThrow(OrganizationNotFoundException::new);
@@ -52,11 +57,12 @@ public class OrganizationService {
 
         return updatedOrganization;
     }
+
     @Transactional
-    public boolean deleteCustomer(Long orgId){
+    public boolean deleteCustomer(Long orgId) {
         var org = organizationRepository.findById(orgId);
 
-        if(org.isPresent()){
+        if (org.isPresent()) {
             organizationRepository.deleteById(orgId);
             return true;
         }

@@ -22,23 +22,28 @@ public class GuideService {
         this.guideRepository = guideRepository;
         this.qualificationRepository = qualificationRepository;
     }
-    public List<Guide> getAll(){
+
+    public List<Guide> getAll() {
         return guideRepository.findAll();
     }
-    public Guide getGuideById(Long id){
+
+    public Guide getGuideById(Long id) {
         return guideRepository.findById(id).orElseThrow(GuideNotFoundException::new);
     }
-    public List<Qualification> getGuideQualificationsById(Long guideId){
+
+    public List<Qualification> getGuideQualificationsById(Long guideId) {
         return qualificationRepository.findByUserId(guideId);
     }
-    public Set<Organization> getGuideOrganizations(Long guideId){
-       return guideRepository.findByIdWithOrganizations(guideId)
+
+    public Set<Organization> getGuideOrganizations(Long guideId) {
+        return guideRepository.findByIdWithOrganizations(guideId)
                 .map(Guide::getAssociatedOrganizations)
                 .orElse(Collections.emptySet());
     }
+
     @Transactional
     // Make custom validation for this method
-    public Guide createGuide(GuideCreateDto createDto){
+    public Guide createGuide(GuideCreateDto createDto) {
 
         Guide newGuide = new Guide();
 
@@ -48,6 +53,7 @@ public class GuideService {
         Guide savedGuide = guideRepository.save(newGuide);
         return savedGuide;
     }
+
     @Transactional
     public Guide updateGuide(Long id, GuideUpdateDto updateDto) throws ResourceNotFoundException {
         Guide guide = guideRepository.findById(id).orElseThrow(GuideNotFoundException::new);
@@ -59,11 +65,12 @@ public class GuideService {
 
         return updatedGuide;
     }
+
     @Transactional
-    public boolean deleteCustomer(Long guideId){
+    public boolean deleteCustomer(Long guideId) {
         var guide = guideRepository.findById(guideId);
 
-        if(guide.isPresent()){
+        if (guide.isPresent()) {
             guideRepository.deleteById(guideId);
             return true;
         }

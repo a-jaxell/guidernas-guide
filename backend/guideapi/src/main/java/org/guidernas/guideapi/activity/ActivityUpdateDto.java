@@ -16,6 +16,6 @@ public record ActivityUpdateDto(
         @PositiveOrZero
         Long id,
         String status, @Size(max = 255) String description,
-                                @FutureOrPresent LocalDateTime startTime, @FutureOrPresent LocalDateTime endTime,
-                                ActivityType type) implements Serializable {
+        @FutureOrPresent LocalDateTime startTime, @FutureOrPresent LocalDateTime endTime,
+        ActivityType type) implements Serializable {
 }

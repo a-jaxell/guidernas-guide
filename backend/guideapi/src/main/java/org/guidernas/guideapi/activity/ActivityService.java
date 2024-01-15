@@ -12,25 +12,29 @@ public class ActivityService {
 
     private final ActivityRepository repository;
 
-    public ActivityService(ActivityRepository activityRepository){
+    public ActivityService(ActivityRepository activityRepository) {
         this.repository = activityRepository;
     }
 
-    public Activity getActivityById(Long id){
+    public Activity getActivityById(Long id) {
         return repository.findById(id).orElseThrow(ActivityNotFoundException::new);
     }
-    public List<Activity> getAllActivities(){
+
+    public List<Activity> getAllActivities() {
         return repository.findAll();
     }
-    public List<Activity> getAllActivitiesByGuideId(Long guideId){
+
+    public List<Activity> getAllActivitiesByGuideId(Long guideId) {
         return repository.findActivitiesByGuideId(guideId);
     }
-    public List<Activity> getAllActivitiesByOrganizationId(Long orgId){
+
+    public List<Activity> getAllActivitiesByOrganizationId(Long orgId) {
         return repository.findByHostOrganizationId(orgId);
     }
+
     @Transactional
     // Make custom validation for this method
-    public Activity createActivity(ActivityCreateDto activityCreate){
+    public Activity createActivity(ActivityCreateDto activityCreate) {
 
         Activity newActivity = new Activity();
 
@@ -43,6 +47,7 @@ public class ActivityService {
         Activity savedActivity = repository.save(newActivity);
         return savedActivity;
     }
+
     @Transactional
     public Activity updateActivity(ActivityUpdateDto updateDto) throws ResourceNotFoundException {
         Activity activity = repository.findById(updateDto.id()).orElseThrow(ActivityNotFoundException::new);
@@ -57,11 +62,12 @@ public class ActivityService {
 
         return updatedActivity;
     }
+
     @Transactional
-    public boolean deleteActivity(Long activityId){
+    public boolean deleteActivity(Long activityId) {
         var activity = repository.findById(activityId);
 
-        if(activity.isPresent()){
+        if (activity.isPresent()) {
             repository.deleteById(activityId);
             return true;
         }

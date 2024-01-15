@@ -24,23 +24,27 @@ public class CustomerService {
         this.qualificationRepository = qualificationRepository;
     }
 
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
-    public Customer getCustomerById(Long id){
+
+    public Customer getCustomerById(Long id) {
         return customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
     }
-    public List<Qualification> getCustomerQualifications(Long customerId){
+
+    public List<Qualification> getCustomerQualifications(Long customerId) {
         return qualificationRepository.findByUserId(customerId);
     }
-    public Set<Activity> getCustomerActivities(Long customerId){
+
+    public Set<Activity> getCustomerActivities(Long customerId) {
         return customerRepository.findByIdWithAttendedActivities(customerId)
                 .map(Customer::getAttendedActivities)
                 .orElse(Collections.emptySet());
     }
+
     @Transactional
     // Make custom validation for this method
-    public Customer createCustomer(CustomerCreateDto createDto){
+    public Customer createCustomer(CustomerCreateDto createDto) {
 
         Customer newCustomer = new Customer();
 
@@ -50,6 +54,7 @@ public class CustomerService {
         Customer savedCustomer = customerRepository.save(newCustomer);
         return savedCustomer;
     }
+
     @Transactional
     public Customer updateCustomer(Long id, CustomerUpdateDto updateDto) throws ResourceNotFoundException {
         Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
@@ -61,11 +66,12 @@ public class CustomerService {
 
         return updatedCustomer;
     }
+
     @Transactional
-    public boolean deleteCustomer(Long customerId){
+    public boolean deleteCustomer(Long customerId) {
         var customer = customerRepository.findById(customerId);
 
-        if(customer.isPresent()){
+        if (customer.isPresent()) {
             customerRepository.deleteById(customerId);
             return true;
         }

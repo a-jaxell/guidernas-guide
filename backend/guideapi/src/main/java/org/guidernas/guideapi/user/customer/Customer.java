@@ -9,7 +9,6 @@ import org.guidernas.guideapi.qualification.Qualification;
 import org.guidernas.guideapi.user.User;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
