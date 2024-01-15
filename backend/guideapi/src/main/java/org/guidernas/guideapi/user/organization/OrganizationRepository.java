@@ -1,4 +1,4 @@
-package org.guidernas.guideapi.user;
+package org.guidernas.guideapi.user.organization;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

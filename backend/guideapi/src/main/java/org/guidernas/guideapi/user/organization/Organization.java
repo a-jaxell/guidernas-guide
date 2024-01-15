@@ -1,13 +1,14 @@
-package org.guidernas.guideapi.user;
+package org.guidernas.guideapi.user.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.guidernas.guideapi.activity.Activity;
+import org.guidernas.guideapi.user.Professional;
+import org.guidernas.guideapi.user.guide.Guide;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

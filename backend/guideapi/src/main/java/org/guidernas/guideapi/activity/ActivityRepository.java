@@ -1,6 +1,5 @@
 package org.guidernas.guideapi.activity;
 
-import org.guidernas.guideapi.user.Guide;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

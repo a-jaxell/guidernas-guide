@@ -1,22 +1,16 @@
 package org.guidernas.guideapi.activity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-import org.geolatte.geom.Point;
-import org.guidernas.guideapi.qualification.Qualification;
-import org.guidernas.guideapi.user.Customer;
-import org.guidernas.guideapi.user.Guide;
-import org.guidernas.guideapi.user.Organization;
+import org.guidernas.guideapi.user.customer.Customer;
+import org.guidernas.guideapi.user.guide.Guide;
+import org.guidernas.guideapi.user.organization.Organization;
 
-import java.awt.geom.Point2D;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -1,17 +1,13 @@
-package org.guidernas.guideapi.user;
+package org.guidernas.guideapi.user.customer;
 
 import jakarta.transaction.Transactional;
 import org.guidernas.guideapi.activity.Activity;
-import org.guidernas.guideapi.activity.ActivityCreateDto;
-import org.guidernas.guideapi.activity.ActivityUpdateDto;
-import org.guidernas.guideapi.exception.ActivityNotFoundException;
 import org.guidernas.guideapi.exception.CustomerNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.qualification.Qualification;
 import org.guidernas.guideapi.qualification.QualificationRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
