@@ -12,6 +12,7 @@ const ActivityForm = () => {
   const handleSubmit = (event: React.FormEvent) => {
     // TODO: Use a state/store manager to set these in the state and then submit that object on submit
     const formData = new FormData(event.target);
+    // TODO : decide wether to use HTML form handling or use state with store management
     event.preventDefault();
     console.log(formData);
     console.log({
