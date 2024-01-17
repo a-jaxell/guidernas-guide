@@ -1,4 +1,4 @@
-export type Activity {
+export interface Activity {
     title: string;
     description: string;
     type: ActivityType;
@@ -9,13 +9,13 @@ export type Activity {
     leaders: Guide[];
 }   
 
-enum ActivityType {
+export enum ActivityType {
     SKIING= "Skiing",
     HIKING= "Hiking",
     KAYAKING= "Kayaking",
     CLIMBING= "Climbing"
 }
-enum ActivityFormat {
+export enum ActivityFormat {
     EXPEDITION= "Expedition",
     MULTIDAY= "Multiday",
     DAYTRIP= "Daytrip",
@@ -23,26 +23,26 @@ enum ActivityFormat {
     SEMINAR= "Seminar"
 }
 
-interface User {
+export interface User {
     userId: number;
     createdAt: Date;
 }
-interface Professional extends User{
+export interface Professional extends User{
 
 }
-interface Customer extends User{
+export interface Customer extends User{
     firstName: string;
     lastName: string;
     qualifications: string[];
     attendedActivities: Activity[];
 }
-interface Guide extends Professional{
+export interface Guide extends Professional{
     firstName: string;
     lastName: string;
     qualifications: string[];
     assignedActivities: Activity[];
 }
-interface Organization extends Professional{
+export interface Organization extends Professional{
     organizationName: string;
     descripton: string;
     associatedGuides: Guide[];
