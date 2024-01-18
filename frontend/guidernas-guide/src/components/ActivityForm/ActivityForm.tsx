@@ -1,15 +1,16 @@
 'use client'
+import { createActivity } from '@/utils/data';
 import { Activity, ActivityFormat, ActivityType } from '@/utils/types';
 import React, { useEffect, useState } from 'react'
 
-const ActivityForm = ({initialData}: {initialData: Activity}) => {
+const ActivityForm = ({ initialData = { title: '', description: '', type: '' as ActivityType, format: '' as ActivityFormat }}: {initialData: Activity}) => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
       setIsEditMode(Boolean(initialData && initialData.id));
   }, [initialData]);
   
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     // TODO: Use a state/store manager to set these in the state and then submit that object on submit
     // TODO: Add validation
@@ -18,7 +19,8 @@ const ActivityForm = ({initialData}: {initialData: Activity}) => {
     // TODO: Add success message
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    
+    await createActivity(data);
 
     };
 
