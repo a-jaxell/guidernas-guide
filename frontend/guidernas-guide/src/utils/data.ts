@@ -2,7 +2,17 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // The following methods are meant to be used as shorthand for api requests to certain endpoints
+export const getActivity = async (id: number)=> {
+    const response = await fetch(`${API_BASE_URL}/activities/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    const data = await response.json();
+    return data;
 
+};
 export const createActivity = async (activityData: any)=> {
     const response = await fetch(`${API_BASE_URL}/activities`, {
         method: 'POST',

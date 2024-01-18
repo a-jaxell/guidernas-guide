@@ -1,10 +1,11 @@
 'use client'
-import { createActivity } from '@/utils/data';
+import { createActivity, getActivity } from '@/utils/data';
 import { Activity, ActivityFormat, ActivityType } from '@/utils/types';
 import React, { useEffect, useState } from 'react'
 
 const ActivityForm = ({ initialData = { title: '', description: '', type: '' as ActivityType, format: '' as ActivityFormat }}: {initialData: Activity}) => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [req, setReq] = useState('')
 
   useEffect(() => {
       setIsEditMode(Boolean(initialData && initialData.id));
@@ -23,6 +24,13 @@ const ActivityForm = ({ initialData = { title: '', description: '', type: '' as 
     await createActivity(data);
 
     };
+    const handleRequest = async () => {
+      
+      const request = parseInt(req);
+      const response = await getActivity(request);
+    
+      console.log(response);
+    }
 
   return (
 
@@ -45,6 +53,8 @@ const ActivityForm = ({ initialData = { title: '', description: '', type: '' as 
               </select>
               {/* datepicker here https://ui.shadcn.com/docs/components/date-picker */}
               <input className='btn btn-secondary w-full max-w-xs' type="submit"/>
+              <input onChange={e=> setReq(e.target.value)}type="text" name="id" defaultValue={initialData.id||""}/>
+              <button className='btn btn-secondary w-full max-w-xs' type="button" onClick={()=>handleRequest(2)}>Get Activity</button>
         </form>
     </div>
   )
