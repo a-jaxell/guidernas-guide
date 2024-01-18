@@ -1,0 +1,32 @@
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses : actions/checkout@v3
+      - name: Get Java version
+        run: |
+          Java_Version=$(mvn help:evaluate "-D expression=maven.compiler.release" -q -D forceStdout | sed -e 's/^1\./1.0./')
+          echo "Java_Version=$Java_Version" >> $GITHUB_ENV
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.Java_Version }}
+          distribution: 'temurin'
+          cache: maven
+      - name: Compile with Maven
+        run: mvn -B compile --file pom.xml
+
+      - name: Test with Maven
+        run: mvn -B test --file pom.xml
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Run Tests
+        run: mvn test
