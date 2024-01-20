@@ -1,4 +1,4 @@
-FROM ubuntu:latest
-LABEL authors="alvarjaxell"
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
 
-ENTRYPOINT ["top", "-b"]
+
