@@ -53,7 +53,7 @@ const ActivityForm = ({ initialData = { title: '', description: '', type: '' as 
               </select>
               {/* datepicker here https://ui.shadcn.com/docs/components/date-picker */}
               <input className='btn btn-secondary w-full max-w-xs' type="submit"/>
-              <input onChange={e=> setReq(e.target.value)}type="text" name="id" defaultValue={initialData.id||""}/>
+              <input className= 'input input-lg input-primary w-full max-w-xs' onChange={e=> setReq(e.target.value)}type="text" name="id" defaultValue={initialData.id||""}/>
               <button className='btn btn-secondary w-full max-w-xs' type="button" onClick={()=>handleRequest(2)}>Get Activity</button>
         </form>
     </div>
