@@ -18,3 +18,5 @@ const firebaseConfig = {
 // If there is at least one running app return apps, otherwise initialize firebase
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+export {auth};
