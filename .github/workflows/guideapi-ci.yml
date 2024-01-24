@@ -13,14 +13,11 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - uses : actions/checkout@v3
-      - name: Get Java version
-        run: |
-          Java_Version=$(mvn help:evaluate "-Dexpression=maven.compiler.release" -q -DforceStdout | sed -e 's/^1\./1.0./')
-          echo "Java_Version=$Java_Version" >> $GITHUB_ENV
+      
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ env.Java_Version }}
+          java-version: 21
           distribution: 'temurin'
           cache: maven
 
