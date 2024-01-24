@@ -3,5 +3,8 @@
 
 
 ### IntelliJIDEA ###
-
 .idea
+
+
+### environment ###
+.env

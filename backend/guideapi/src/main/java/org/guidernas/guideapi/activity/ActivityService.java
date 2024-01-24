@@ -42,7 +42,7 @@ public class ActivityService {
         newActivity.setType(activityCreate.type());
         newActivity.setStatus(activityCreate.status());
         newActivity.setStartTime(activityCreate.startTime());
-        newActivity.setEndTime(activityCreate.startTime());
+        newActivity.setEndTime(activityCreate.endTime());
 
         Activity savedActivity = repository.save(newActivity);
         return savedActivity;

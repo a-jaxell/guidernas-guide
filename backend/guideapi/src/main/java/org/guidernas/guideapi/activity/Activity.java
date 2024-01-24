@@ -49,7 +49,7 @@ public class Activity {
     @Enumerated
     private ActivityType type;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "activity_guide",
             joinColumns = @JoinColumn(name = "activity_id"),
@@ -57,7 +57,7 @@ public class Activity {
     )
     private Set<Guide> leaders = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "activity_attendee",
             joinColumns = @JoinColumn(name = "activity_id"),
