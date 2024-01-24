@@ -27,7 +27,6 @@ class ActivityServiceTest {
     private ActivityService service;
 
 
-
     @Test
     void getActivityById_validId_returnsActivity() {
         Long validId = 1L;
@@ -38,6 +37,7 @@ class ActivityServiceTest {
 
         assertEquals(mockActivity, result);
     }
+
     @Test
     void getActivityById_invalidId_throwsException() {
         Long invalidId = 2L;
@@ -47,6 +47,7 @@ class ActivityServiceTest {
             service.getActivityById(invalidId);
         });
     }
+
     @Test
     void whenGetAllActivities_thenAllActivitiesShouldBeReturned() {
         List<Activity> activities = List.of(new Activity(), new Activity());
@@ -67,6 +68,7 @@ class ActivityServiceTest {
 
         assertEquals(activities, result);
     }
+
     @Test
     void getAllActivitiesByGuideId_invalidId_throwsException() {
         Long invalidId = 2L;
@@ -76,6 +78,7 @@ class ActivityServiceTest {
             service.getAllActivitiesByGuideId(invalidId);
         });
     }
+
     @Test
     void getAllActivitiesByOrganizationId_validId_returnsActivities() {
         Long validId = 1L;
@@ -86,6 +89,7 @@ class ActivityServiceTest {
 
         assertEquals(activities, result);
     }
+
     @Test
     void getAllActivitiesByOrganizationId_invalidId_throwsException() {
         Long invalidId = 2L;
@@ -118,8 +122,9 @@ class ActivityServiceTest {
 
         assertEquals(existingActivity, result);
     }
+
     @Test
-    public void whenUpdateActivityWithInvalidId_thenThrowActivityNotFoundException(){
+    public void whenUpdateActivityWithInvalidId_thenThrowActivityNotFoundException() {
         ActivityUpdateDto updateDto = TestUtil.createActivityUpdateDto(1L, "Updated Status", "Updated Description", LocalDateTime.now(), LocalDateTime.now().plusHours(2), ActivityType.SKIING);
         when(repository.findById(updateDto.id())).thenThrow(ActivityNotFoundException.class);
 
