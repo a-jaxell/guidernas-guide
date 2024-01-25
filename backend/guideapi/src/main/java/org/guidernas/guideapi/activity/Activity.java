@@ -2,6 +2,7 @@ package org.guidernas.guideapi.activity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,9 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "status", nullable = false)
     private String status;
@@ -46,7 +50,7 @@ public class Activity {
     @JoinColumn(name = "host_organization_id")
     private Organization hostOrganization;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ActivityType type;
 
     @ManyToMany(fetch = FetchType.EAGER)
