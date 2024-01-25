@@ -1,6 +1,7 @@
 package org.guidernas.guideapi.user.guide;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.guidernas.guideapi.exception.GuideNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.qualification.Qualification;
@@ -43,7 +44,7 @@ public class GuideService {
 
     @Transactional
     // Make custom validation for this method
-    public Guide createGuide(GuideCreateDto createDto) {
+    public Guide createGuide(@Valid GuideCreateDto createDto) {
 
         Guide newGuide = new Guide();
 
@@ -55,7 +56,7 @@ public class GuideService {
     }
 
     @Transactional
-    public Guide updateGuide(Long id, GuideUpdateDto updateDto) throws ResourceNotFoundException {
+    public Guide updateGuide(Long id, @Valid GuideUpdateDto updateDto) throws ResourceNotFoundException {
         Guide guide = guideRepository.findById(id).orElseThrow(GuideNotFoundException::new);
 
         if (updateDto.firstName() != null) guide.setFirstName(updateDto.firstName());

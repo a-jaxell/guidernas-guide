@@ -1,6 +1,7 @@
 package org.guidernas.guideapi.user.customer;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.guidernas.guideapi.activity.Activity;
 import org.guidernas.guideapi.exception.CustomerNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
@@ -44,7 +45,7 @@ public class CustomerService {
 
     @Transactional
     // Make custom validation for this method
-    public Customer createCustomer(CustomerCreateDto createDto) {
+    public Customer createCustomer(@Valid CustomerCreateDto createDto) {
 
         Customer newCustomer = new Customer();
 
@@ -56,7 +57,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public Customer updateCustomer(Long id, CustomerUpdateDto updateDto) throws ResourceNotFoundException {
+    public Customer updateCustomer(Long id, @Valid CustomerUpdateDto updateDto) throws ResourceNotFoundException {
         Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
 
         if (updateDto.firstName() != null) customer.setFirstName(updateDto.firstName());

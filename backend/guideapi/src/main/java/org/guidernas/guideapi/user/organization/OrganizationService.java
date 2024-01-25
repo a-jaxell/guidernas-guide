@@ -1,6 +1,7 @@
 package org.guidernas.guideapi.user.organization;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.guidernas.guideapi.exception.OrganizationNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.user.guide.Guide;
@@ -35,7 +36,7 @@ public class OrganizationService {
 
     @Transactional
     // Make custom validation for this method
-    public Organization createOrganization(OrganizationCreateDto createDto) {
+    public Organization createOrganization(@Valid OrganizationCreateDto createDto) {
 
         Organization newOrganization = new Organization();
 
@@ -47,7 +48,7 @@ public class OrganizationService {
     }
 
     @Transactional
-    public Organization updateOrganization(Long id, OrganizationUpdateDto updateDto) throws ResourceNotFoundException {
+    public Organization updateOrganization(Long id, @Valid OrganizationUpdateDto updateDto) throws ResourceNotFoundException {
         Organization org = organizationRepository.findById(id).orElseThrow(OrganizationNotFoundException::new);
 
         if (updateDto.description() != null) org.setDescription(updateDto.description());

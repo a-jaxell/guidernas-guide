@@ -51,7 +51,7 @@ public class ActivityService {
 
     @Transactional
     public Activity updateActivity(@Valid ActivityUpdateDto updateDto) throws ResourceNotFoundException {
-        Activity activity = repository.findById(updateDto.id()).orElseThrow(ActivityNotFoundException::new);
+        Activity activity = repository.findById(updateDto.id()).orElseThrow(() -> new ResourceNotFoundException("No Activity with that ID"));
 
         if (updateDto.status() != null) activity.setStatus(updateDto.status());
         if (updateDto.description() != null) activity.setStatus(updateDto.description());
