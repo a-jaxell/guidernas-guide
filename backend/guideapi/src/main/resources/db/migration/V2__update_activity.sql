@@ -1,5 +1,5 @@
 ALTER TABLE activity
-    ADD title VARCHAR(255) NULL;
+    ADD activity_title VARCHAR(255) NULL;
 
 ALTER TABLE activity
     DROP COLUMN type;
