@@ -13,16 +13,16 @@ public enum ActivityFormat {
         this.value = value;
     }
 
-    public String getValue(){
-        return value;
-    }
-
-    public static ActivityFormat fromString(String text){
+    public static ActivityFormat fromString(String text) {
         for (ActivityFormat b : ActivityFormat.values()) {
-            if(b.value.equalsIgnoreCase(text)){
+            if (b.value.equalsIgnoreCase(text)) {
                 return b;
             }
         }
         throw new IllegalArgumentException("No format with " + text + " found");
+    }
+
+    public String getValue() {
+        return value;
     }
 }

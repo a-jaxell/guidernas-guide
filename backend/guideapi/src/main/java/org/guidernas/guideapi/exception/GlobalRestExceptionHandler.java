@@ -28,23 +28,25 @@ public class GlobalRestExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<String> handleInvalidRequestException(InvalidRequestException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleValidationExceptions (MethodArgumentNotValidException ex){
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
-           String fieldName = ((FieldError) error).getField();
-           String errorMessage = error.getDefaultMessage();
-           errors.put(fieldName, errorMessage);
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<ErrorResponse> handleSQLConstraintException(SQLIntegrityConstraintViolationException ex, WebRequest request){
+    public ResponseEntity<ErrorResponse> handleSQLConstraintException(SQLIntegrityConstraintViolationException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimeStamp(LocalDateTime.now());
         errorResponse.setStatus(HttpStatus.METHOD_NOT_ALLOWED.value());

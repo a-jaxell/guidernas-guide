@@ -11,16 +11,16 @@ public enum ActivityType {
         this.value = value;
     }
 
-    public String getValue(){
-        return value;
-    }
-
-    public static ActivityType fromString(String text){
-        for(ActivityType b : ActivityType.values()){
-            if(b.value.equalsIgnoreCase(text)){
+    public static ActivityType fromString(String text) {
+        for (ActivityType b : ActivityType.values()) {
+            if (b.value.equalsIgnoreCase(text)) {
                 return b;
             }
         }
         throw new IllegalArgumentException("No type with " + text + " found.");
+    }
+
+    public String getValue() {
+        return value;
     }
 }

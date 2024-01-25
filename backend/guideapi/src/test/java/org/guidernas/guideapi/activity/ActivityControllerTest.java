@@ -1,7 +1,5 @@
 package org.guidernas.guideapi.activity;
 
-import org.guidernas.guideapi.exception.ActivityNotFoundException;
-import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.guidernas.guideapi.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +9,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +31,7 @@ class ActivityControllerTest {
     private Activity activity;
     private ActivityCreateDto activityCreateDto;
     private ActivityUpdateDto activityUpdateDto;
+
     @BeforeEach
     void setUp() {
         activity = new Activity();
@@ -51,9 +51,10 @@ class ActivityControllerTest {
         assertEquals(response.getBody(), activity);
         verify(activityService).getActivityById(id);
     }
+
     @Test
     void getAllActivitiesTest() {
-        List<Activity> activities = Arrays.asList(activity);
+        List<Activity> activities = Collections.singletonList(activity);
         when(activityService.getAllActivities()).thenReturn(activities);
 
         ResponseEntity<List<Activity>> response = activityController.getAllActivities();
@@ -66,7 +67,7 @@ class ActivityControllerTest {
     @Test
     void getAllActivitiesByGuideIdTest() {
         Long guideId = 1L;
-        List<Activity> activities = Arrays.asList(activity);
+        List<Activity> activities = Collections.singletonList(activity);
         when(activityService.getAllActivitiesByGuideId(guideId)).thenReturn(activities);
 
         ResponseEntity<List<Activity>> response = activityController.getAllActivitiesByGuideId(guideId);
@@ -79,7 +80,7 @@ class ActivityControllerTest {
     @Test
     void getAllActivitiesByOrganizationIdTest() {
         Long organizationId = 1L;
-        List<Activity> activities = Arrays.asList(activity);
+        List<Activity> activities = Collections.singletonList(activity);
         when(activityService.getAllActivitiesByOrganizationId(organizationId)).thenReturn(activities);
 
         ResponseEntity<List<Activity>> response = activityController.getAllActivitiesByOrganizationId(organizationId);
@@ -100,6 +101,7 @@ class ActivityControllerTest {
         assertEquals(activity, response.getBody());
         verify(activityService).createActivity(activityCreateDto);
     }
+
     @Test
     void updateActivityTest_success() {
         when(activityService.updateActivity(activityUpdateDto)).thenReturn(activity);
@@ -111,6 +113,7 @@ class ActivityControllerTest {
         assertEquals(activity, response.getBody());
         verify(activityService).updateActivity(activityUpdateDto);
     }
+
     @Test
     void deleteActivitySuccessTest() {
         Long id = 1L;
@@ -122,6 +125,7 @@ class ActivityControllerTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(activityService).deleteActivity(id);
     }
+
     @Test
     void deleteActivityFailureTest() {
         Long id = 1L;
