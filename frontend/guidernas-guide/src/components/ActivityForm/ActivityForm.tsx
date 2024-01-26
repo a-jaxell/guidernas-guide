@@ -49,13 +49,13 @@ const ActivityForm = ({ initialData = {
               <select name='type' defaultValue={initialData.type || "Pick an activity type"} className='select select-md select-primary w-full max-w-xs'>
                 <option disabled>Pick an activity type</option>
                 {Object.values(ActivityType).map((type) => {
-                  return <option key={type} value={type}>{type}</option>
+                  return <option key={type} value={type.toUpperCase()}>{type}</option>
                 })}            
               </select>
               <select name='format'defaultValue={initialData.format || "Pick an activity format"} className='select select-md select-primary w-full max-w-xs'>
                 <option disabled>Pick an activity format</option>
                 {Object.values(ActivityFormat).map((format) => {
-                  return <option key={format} value={format}>{format}</option>
+                  return <option key={format} value={format.toUpperCase()}>{format}</option>
                 })}
               </select>
               {/* datepicker here https://ui.shadcn.com/docs/components/date-picker */}

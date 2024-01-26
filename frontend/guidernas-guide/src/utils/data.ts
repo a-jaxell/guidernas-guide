@@ -1,4 +1,4 @@
-
+'use server'
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // The following methods are meant to be used as shorthand for api requests to certain endpoints
