@@ -1,8 +1,8 @@
 'use client'
-import { createActivity, getActivity } from '@/utils/data'
+import { createActivity, getActivity } from '@/actions/data'
 import { Activity, ActivityFormat, ActivityType } from '@/utils/types'
-import { set } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
+import DateSelector from '../DateSelector/DateSelector'
 
 const ActivityForm = (
         { initialData = 
@@ -38,9 +38,7 @@ const ActivityForm = (
         try {
             const formData = new FormData(event.target as HTMLFormElement)
             const data = Object.fromEntries(formData.entries())
-
             const response = await createActivity(data)
-
             if (response.status !== 200) {
                 setFeedback({
                     message: response.message || 'Something went wrong',
@@ -68,14 +66,14 @@ const ActivityForm = (
 
     return (
         <div className="w-4/5 h-40">
-            <h1>Create new Activity</h1>
-            <form className="form-control" onSubmit={handleSubmit}>
+            <h1 className="text-2xl">Create new Activity</h1>
+            <form className="form-control flex flex-col gap-4 p-5" onSubmit={handleSubmit}>
                 <input
                     name="title"
                     required
                     maxLength={255}
                     defaultValue={initialData.title || ''}
-                    className="input input-lg input-primary w-full max-w-xs"
+                    className="input input-md input-primary w-full max-w-xs"
                     type="text"
                     placeholder="Enter an title"
                 />
@@ -118,16 +116,17 @@ const ActivityForm = (
                         )
                     })}
                 </select>
-                {/* datepicker here https://ui.shadcn.com/docs/components/date-picker */}
+                <DateSelector />
                 <input
                     className="btn btn-secondary w-full max-w-xs"
                     type="submit"
                 />
                 <input
-                    className="input input-lg input-primary w-full max-w-xs"
+                    className="input input-md input-primary w-full max-w-xs"
                     onChange={(e) => setReq(e.target.value)}
                     type="text"
                     name="id"
+                    placeholder='Enter an ID'
                     defaultValue={initialData.id || ''}
                 />
                 <button
