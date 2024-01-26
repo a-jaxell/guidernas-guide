@@ -2,7 +2,7 @@
 import React from 'react'
 import ActivityCreateForm from '../components/ActivityForm/ActivityForm'
 import Layout from './layout'
-import { Activity, ActivityFormat, ActivityType } from '@/utils/types'
+import { Activity } from '@/utils/types'
 
 const initialData: Activity = {
   id: 0,
