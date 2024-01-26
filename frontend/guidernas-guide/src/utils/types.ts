@@ -2,10 +2,10 @@ export interface Activity {
     id: number
     title: string;
     description: string;
-    type: ActivityType;
-    format: ActivityFormat;
-    startTime: Date;
-    endTime: Date;
+    type: ActivityType | null;
+    format: ActivityFormat | null;
+    startTime: Date | null;
+    endTime: Date | null;
     attendees: Customer[];
     leaders: Guide[];
 }   

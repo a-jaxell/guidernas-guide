@@ -24,6 +24,9 @@ public class Activity {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "status", nullable = false)
     private String status;
 
@@ -46,7 +49,7 @@ public class Activity {
     @JoinColumn(name = "host_organization_id")
     private Organization hostOrganization;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ActivityType type;
 
     @ManyToMany(fetch = FetchType.EAGER)

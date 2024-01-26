@@ -1,6 +1,7 @@
 package org.guidernas.guideapi.activity;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.guidernas.guideapi.exception.ActivityNotFoundException;
 import org.guidernas.guideapi.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class ActivityService {
 
     @Transactional
     // Make custom validation for this method
-    public Activity createActivity(ActivityCreateDto activityCreate) {
+    public Activity createActivity(@Valid ActivityCreateDto activityCreate) {
 
         Activity newActivity = new Activity();
 
@@ -49,8 +50,8 @@ public class ActivityService {
     }
 
     @Transactional
-    public Activity updateActivity(ActivityUpdateDto updateDto) throws ResourceNotFoundException {
-        Activity activity = repository.findById(updateDto.id()).orElseThrow(ActivityNotFoundException::new);
+    public Activity updateActivity(@Valid ActivityUpdateDto updateDto) throws ResourceNotFoundException {
+        Activity activity = repository.findById(updateDto.id()).orElseThrow(() -> new ResourceNotFoundException("No Activity with that ID"));
 
         if (updateDto.status() != null) activity.setStatus(updateDto.status());
         if (updateDto.description() != null) activity.setStatus(updateDto.description());

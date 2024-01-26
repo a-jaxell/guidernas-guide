@@ -1,0 +1,44 @@
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'frontend/guidernas-guide/**'
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'frontend/guidernas-guide/**'
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.17.0
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/guidernas-guide-/node_modules
+          key: ${{runner.os}}-node-${{ hashFiles('frontend/guidernas-guide/package_lock.json' }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: 'frontend/guidernas-guide'
+
+      - name: Run linting
+        run: npm run lint
+        working-directory: 'frontend/guidernas-guide'
+
+      - name: Build
+        run: npm run build
+        working-directory: 'frontend/guidernas-guide'
+
+      - name: Run tests
+        run: npm test
+        working-directory: 'frontend/guidernas-guide'

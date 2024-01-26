@@ -4,19 +4,24 @@ import { Activity, ActivityFormat, ActivityType } from '@/utils/types'
 import { set } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 
-const ActivityForm = ({
-    initialData = {
-        title: '',
-        description: '',
-        type: '' as ActivityType,
-        format: '' as ActivityFormat,
-    },
-}: {
-    initialData: Activity
-}) => {
-    const [isEditMode, setIsEditMode] = useState(false)
-    const [req, setReq] = useState('')
-    const [feedback, setFeedback] = useState({ message: '', type: '' })
+const ActivityForm = (
+        { initialData = 
+            { 
+                title: '',
+                description: '', 
+                type: '' as ActivityType, 
+                format: '' as ActivityFormat,
+                id: 0,
+                startTime: null,
+                endTime: null,
+                attendees: [],
+                leaders: [] 
+            }
+        }: {initialData: Activity}
+    ) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [req, setReq] = useState('')
+  const [feedback, setFeedback] = useState({message: '', type:''})
 
     useEffect(() => {
         setIsEditMode(Boolean(initialData && initialData.id))
@@ -91,7 +96,7 @@ const ActivityForm = ({
                     <option disabled>Pick an activity type</option>
                     {Object.values(ActivityType).map((type) => {
                         return (
-                            <option key={type} value={type}>
+                            <option key={type} value={type.toUpperCase()}>
                                 {type}
                             </option>
                         )
@@ -107,7 +112,7 @@ const ActivityForm = ({
                     <option disabled>Pick an activity format</option>
                     {Object.values(ActivityFormat).map((format) => {
                         return (
-                            <option key={format} value={format}>
+                            <option key={format} value={format.toUpperCase()}>
                                 {format}
                             </option>
                         )
@@ -128,7 +133,7 @@ const ActivityForm = ({
                 <button
                     className="btn btn-secondary w-full max-w-xs"
                     type="button"
-                    onClick={() => handleRequest(2)}
+                    onClick={() => handleRequest()}
                 >
                     Get Activity
                 </button>

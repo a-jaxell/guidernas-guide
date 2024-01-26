@@ -1,0 +1,29 @@
+version: '2.26'
+services:
+  next-js-app:
+    build: ./frontend/guidernas-guide
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/guidernas-guide/.env
+    depends_on:
+      - springboot-api
+
+  springboot-api:
+    build: ./backend/guideapi
+    environment:
+      DB_URL: jdbc:mysql://db:3306/guidernas_guide_test
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - db
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: guidernas_guide_test
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
