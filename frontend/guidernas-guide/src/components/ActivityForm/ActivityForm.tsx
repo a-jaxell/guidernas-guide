@@ -1,35 +1,14 @@
 'use client'
 import { createActivity, getActivity } from '@/actions/data'
-import { Activity, ActivityFormat, ActivityStatus, ActivityType } from '@/utils/types'
-import React, { useEffect, useState } from 'react'
+import { ActivityFormat, ActivityType } from '@/utils/types'
+import React, { useState } from 'react'
 import DateSelector from '../DateSelector/DateSelector'
 import useActivityStore from '@/context/useActivityStore'
 
-const ActivityForm = (
-        { initialData = 
-            { 
-                title: '',
-                description: '', 
-                type: '' as ActivityType, 
-                format: '' as ActivityFormat,
-                id: 0,
-                startTime: null,
-                endTime: null,
-                attendees: [],
-                leaders: [],
-                status: ActivityStatus.IDLE
-            }
-        }: {initialData: Activity}
-    ) => {
-  const [isEditMode, setIsEditMode] = useState(false);
+const ActivityForm = () => {
   const [req, setReq] = useState('')
   const [feedback, setFeedback] = useState({message: '', type:''})
   const { formData, handleChange } = useActivityStore();
-
-
-    useEffect(() => {
-        setIsEditMode(Boolean(initialData && initialData.id))
-    }, [initialData])
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -68,12 +47,12 @@ const ActivityForm = (
             <h1 className="text-2xl w-full max-w-xs">Create new Activity</h1>
                 <input
                     name="title"
+                    type="text"
                     required
                     maxLength={255}
                     value={formData.title}
                     onChange={handleChange}
                     className="input input-md input-primary w-full max-w-xs"
-                    type="text"
                     placeholder="Enter an title"
                 />
                 <textarea
