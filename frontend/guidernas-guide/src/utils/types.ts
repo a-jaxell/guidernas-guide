@@ -1,5 +1,5 @@
 export interface Activity {
-    id: number
+    id: number | null;
     title: string;
     status: ActivityStatus;
     description: string;
@@ -27,7 +27,8 @@ export enum ActivityFormat {
 export enum ActivityStatus {
     IDLE="Idle",
     STARTED="Started",
-    FINISHED="Finished"
+    FINISHED="Finished",
+    VOID="Void"
 }
 
 export interface User {
