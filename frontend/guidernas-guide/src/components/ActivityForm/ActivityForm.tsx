@@ -3,6 +3,7 @@ import { createActivity, getActivity } from '@/actions/data'
 import { Activity, ActivityFormat, ActivityStatus, ActivityType } from '@/utils/types'
 import React, { useEffect, useState } from 'react'
 import DateSelector from '../DateSelector/DateSelector'
+import useActivityStore from '@/context/useActivityStore'
 
 const ActivityForm = (
         { initialData = 
@@ -23,6 +24,8 @@ const ActivityForm = (
   const [isEditMode, setIsEditMode] = useState(false);
   const [req, setReq] = useState('')
   const [feedback, setFeedback] = useState({message: '', type:''})
+  const { formData, handleChange } = useActivityStore();
+
 
     useEffect(() => {
         setIsEditMode(Boolean(initialData && initialData.id))
@@ -31,17 +34,9 @@ const ActivityForm = (
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         setFeedback({ message: '', type: '' })
-        // TODO: Use a state/store manager to set these in the state and then submit that object on submit
-        // TODO: Add validation
-        // TODO: Add error handling
-        // TODO: Add API call to submit the data
-        // TODO: Add success message
         try {
-            const formData = new FormData(event.target as HTMLFormElement)
-            let data = Object.fromEntries(formData.entries())
-            // Adds a initial status to Activity
-            data = {...data, status: ActivityStatus.IDLE.toString()}
-            const response = await createActivity(data)
+            const activityData = useActivityStore.getState().formData;
+            const response = await createActivity(activityData)
             if (response.status !== 200) {
                 setFeedback({
                     message: response.message || 'Something went wrong',
@@ -75,7 +70,8 @@ const ActivityForm = (
                     name="title"
                     required
                     maxLength={255}
-                    defaultValue={initialData.title || ''}
+                    value={formData.title}
+                    onChange={handleChange}
                     className="input input-md input-primary w-full max-w-xs"
                     type="text"
                     placeholder="Enter an title"
@@ -84,13 +80,15 @@ const ActivityForm = (
                     name="description"
                     required
                     maxLength={255}
-                    defaultValue={initialData.description || ''}
+                    defaultValue={formData.description}
+                    onChange={handleChange}
                     className="textarea textarea-lg text-base textarea-bordered w-full max-w-xs h-40"
                     placeholder="Enter an Description"
                 />
                 <select
                     name="type"
-                    defaultValue={initialData.type || 'Pick an activity type'}
+                    defaultValue={formData.type || 'Pick an activity type'}
+                    onChange={handleChange}
                     className="select select-md select-primary w-full max-w-xs"
                 >
                     <option disabled>Pick an activity type</option>
@@ -105,8 +103,9 @@ const ActivityForm = (
                 <select
                     name="format"
                     defaultValue={
-                        initialData.format || 'Pick an activity format'
+                        formData.format || 'Pick an activity format'
                     }
+                    onChange={handleChange}
                     className="select select-md select-primary w-full max-w-xs"
                 >
                     <option disabled>Pick an activity format</option>
@@ -129,7 +128,7 @@ const ActivityForm = (
                     type="text"
                     name="id"
                     placeholder='Enter an ID'
-                    defaultValue={initialData.id || ''}
+                    defaultValue={formData.id || ''}
                 />
                 <button
                     className="btn btn-secondary w-full max-w-xs"

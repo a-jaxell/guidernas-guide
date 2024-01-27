@@ -1,21 +1,11 @@
-'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import { DateTime } from 'luxon'
-import { format } from 'path'
-import { start } from 'repl'
+import useActivityStore from '@/context/useActivityStore'
 
 const DateSelector = () => {
     // This is meant to be a part of a form that will pass value to the parent component
-    const [startDate, setStartDate] = useState(DateTime.local().toFormat('yyyy-LL-dd\'T\'HH:mm'))
-    const [endDate, setEndDate] = useState(DateTime.local().toFormat('yyyy-LL-dd\'T\'HH:mm'))
 
-        // Create an object in the state that all these methods will pass data into
-        // and then use that object in the parent component when making an api request
-        // to the backend
-
-        const formatDateTime = (date: string) => {
-            return `${date}T03:00:00`; // Adds default time to date
-        };    
+    const { formData, handleChange } = useActivityStore();
 
     return (
         <div className="w-full max-ws-xs p-5">
@@ -26,8 +16,8 @@ const DateSelector = () => {
                 name="startTime"
                 className="h-8 text-center pr-2 rounded-md"
                 type="datetime-local"
-                onChange={(e) => setStartDate(e.target.value)}
-                value={startDate}
+                onChange={handleChange}
+                value={formData.startTime}
             />
             <div className='label'>
                 <span className='label-text'>End date</span>
@@ -36,8 +26,8 @@ const DateSelector = () => {
                 name="endTime"
                 className="h-8 text-center pr-2 rounded-md"
                 type="datetime-local"
-                onChange={(e) => setEndDate(e.target.value)}
-                value={endDate}
+                onChange={handleChange}
+                value={formData.endTime}
             />
         </div>
     )
