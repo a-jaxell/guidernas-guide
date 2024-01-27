@@ -66,8 +66,8 @@ const ActivityForm = (
 
     return (
         <div className="w-4/5 h-40">
-            <h1 className="text-2xl">Create new Activity</h1>
             <form className="form-control flex flex-col gap-4 p-5" onSubmit={handleSubmit}>
+            <h1 className="text-2xl w-full max-w-xs">Create new Activity</h1>
                 <input
                     name="title"
                     required
@@ -77,13 +77,12 @@ const ActivityForm = (
                     type="text"
                     placeholder="Enter an title"
                 />
-                <input
+                <textarea
                     name="description"
                     required
                     maxLength={255}
                     defaultValue={initialData.description || ''}
-                    className="textarea textarea-lg textarea-bordered w-full max-w-xs h-40"
-                    type="textarea"
+                    className="textarea textarea-lg text-base textarea-bordered w-full max-w-xs h-40"
                     placeholder="Enter an Description"
                 />
                 <select
