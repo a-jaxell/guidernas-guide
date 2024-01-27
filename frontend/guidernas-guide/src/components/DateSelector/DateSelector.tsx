@@ -6,8 +6,8 @@ import { start } from 'repl'
 
 const DateSelector = () => {
     // This is meant to be a part of a form that will pass value to the parent component
-    const [startDate, setStartDate] = useState(DateTime.now().toISODate())
-    const [endDate, setEndDate] = useState(DateTime.now().toISODate())
+    const [startDate, setStartDate] = useState(DateTime.local().toFormat('yyyy-LL-dd\'T\'HH:mm'))
+    const [endDate, setEndDate] = useState(DateTime.local().toFormat('yyyy-LL-dd\'T\'HH:mm'))
 
         // Create an object in the state that all these methods will pass data into
         // and then use that object in the parent component when making an api request
@@ -25,7 +25,7 @@ const DateSelector = () => {
             <input
                 name="startTime"
                 className="h-8 text-center pr-2 rounded-md"
-                type="date"
+                type="datetime-local"
                 onChange={(e) => setStartDate(e.target.value)}
                 value={startDate}
             />
@@ -35,7 +35,7 @@ const DateSelector = () => {
             <input
                 name="endTime"
                 className="h-8 text-center pr-2 rounded-md"
-                type="date"
+                type="datetime-local"
                 onChange={(e) => setEndDate(e.target.value)}
                 value={endDate}
             />
