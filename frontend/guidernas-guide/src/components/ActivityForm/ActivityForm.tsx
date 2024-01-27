@@ -1,6 +1,6 @@
 'use client'
 import { createActivity, getActivity } from '@/actions/data'
-import { Activity, ActivityFormat, ActivityType } from '@/utils/types'
+import { Activity, ActivityFormat, ActivityStatus, ActivityType } from '@/utils/types'
 import React, { useEffect, useState } from 'react'
 import DateSelector from '../DateSelector/DateSelector'
 
@@ -15,7 +15,8 @@ const ActivityForm = (
                 startTime: null,
                 endTime: null,
                 attendees: [],
-                leaders: [] 
+                leaders: [],
+                status: ActivityStatus.IDLE
             }
         }: {initialData: Activity}
     ) => {
@@ -37,7 +38,9 @@ const ActivityForm = (
         // TODO: Add success message
         try {
             const formData = new FormData(event.target as HTMLFormElement)
-            const data = Object.fromEntries(formData.entries())
+            let data = Object.fromEntries(formData.entries())
+            // Adds a initial status to Activity
+            data = {...data, status: ActivityStatus.IDLE.toString()}
             const response = await createActivity(data)
             if (response.status !== 200) {
                 setFeedback({
