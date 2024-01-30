@@ -7,8 +7,8 @@ export interface Activity {
     description: string;
     type: ActivityType | null;
     format: ActivityFormat | null;
-    startTime: Date | null;
-    endTime: Date | null;
+    startTime: Date | null | string;
+    endTime: Date | null | string;
     attendees: Customer[];
     leaders: Guide[];
 }   
