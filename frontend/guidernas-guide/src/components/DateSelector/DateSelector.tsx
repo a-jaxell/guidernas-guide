@@ -17,7 +17,7 @@ const DateSelector = () => {
                 className="h-8 text-center pr-2 rounded-md"
                 type="datetime-local"
                 onChange={handleChange}
-                value={formData.startTime || DateTime.now().toFormat('yyyy-MM-dd HH:mm')}
+                value={formData.startTime as string || DateTime.now().toFormat('yyyy-MM-dd HH:mm')}
             />
             <div className='label'>
                 <span className='label-text'>End date</span>
@@ -27,7 +27,7 @@ const DateSelector = () => {
                 className="h-8 text-center pr-2 rounded-md"
                 type="datetime-local"
                 onChange={handleChange}
-                value={formData.endTime || DateTime.now().toFormat('yyyy-MM-dd HH:mm')}
+                value={formData.endTime as string || DateTime.now().toFormat('yyyy-MM-dd HH:mm')}
             />
         </div>
     )
