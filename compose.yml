@@ -4,8 +4,6 @@ services:
     build: ./frontend/guidernas-guide
     ports:
       - "3000:3000"
-    env_file:
-      - ./frontend/guidernas-guide/.env
     depends_on:
       - springboot-api
 
