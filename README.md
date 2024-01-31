@@ -1,14 +1,13 @@
 # guidernas-guide
 
-This is my exam project done in January 2024. It explores what it is
-like creating a fullstack app.
+This is my exam project done in January 2024.
 
-Next.js, React, tailwindcss and daisyUI for frontend and Java and
-Springboot with a MySQL server for the backend. 
-
+It consists of a Next.js frontend and an Springboot backend
+integrated with a MySql database.
 
 
-### Installation
+
+## Getting started
 
 This project requires Docker to containerize and run both 
 backend and frontend in composition with `docker-compose`
@@ -27,6 +26,8 @@ Then clone the repo with `git clone` to your computer
 
 In the root folder run: 
 
-`DB_PASSWORD=root docker-compose up --build` 
+```
+DB_PASSWORD=root docker-compose up --build
+``` 
 
 Then access the application on http://localhost:3000
