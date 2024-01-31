@@ -20,8 +20,6 @@ npm i -g docker
 
 Then clone the repo with `git clone` to your computer 
 
----
-
 ### Running the application
 
 In the root folder run: 
